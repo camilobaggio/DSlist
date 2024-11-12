@@ -8,6 +8,8 @@ import com.devproject.dslist.repositories.GameRepository;
 import com.devproject.dslist.dto.GameDTO;
 import com.devproject.dslist.dto.GameMinDTO;
 import com.devproject.dslist.entities.Game;
+import com.devproject.dslist.projections.GameMinProjection;
+
 import java.util.List;
 
 @Service
@@ -28,6 +30,13 @@ public class GameService {
 		List<Game> result = gameRepository.findAll();
 		List <GameMinDTO> dto = result.stream().map(x -> new GameMinDTO(x)).toList();
 		return dto;
+		}
+	
+	@Transactional(readOnly = true)
+	public List<GameMinDTO> findByList(Long listId){	
+		List<GameMinProjection> result = gameRepository.searchByList(listId);
+		return result.stream().map(x -> new GameMinDTO(x)).toList();
+	
 		}
 		
 	
