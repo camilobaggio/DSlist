@@ -1,5 +1,6 @@
 package com.devproject.dslist.controllers;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,24 +17,22 @@ import com.devproject.dslist.services.GameService;
 @RestController
 @RequestMapping(value = "/lists")
 public class GameListController {
-	
-	@Autowired
-	private GameListService gameListService;
-	
-	
-	@Autowired
-	private GameService gameService;
+    
+    @Autowired
+    private GameListService gameListService;
+    
+    @Autowired
+    private GameService gameService;
 
-	
-	@GetMapping
-	public List<GameListDTO> findAll(){
-		List<GameListDTO> result = gameListService.findAll();
-		return result;
-	}
-	
-	@GetMapping(value = "/{listID}/games")
-	public List<GameMinDTO> findByList(@PathVariable Long listId){
-		List<GameMinDTO> result = gameService.findByList(listId);
-		return result;
-	}
+    @GetMapping
+    public List<GameListDTO> findAll(){
+        List<GameListDTO> result = gameListService.findAll();
+        return result;
+    }
+    
+    @GetMapping(value = "/{listId}/games")  
+    public List<GameMinDTO> findByList(@PathVariable Long listId){  
+        List<GameMinDTO> result = gameService.findByList(listId);
+        return result;
+    }
 }
